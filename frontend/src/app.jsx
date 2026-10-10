@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import "./style.css";
 
 const API_URL =
-  import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+  import.meta.env.VITE_API_URL ||
+  "https://backend-tau-nine-54.vercel.app";
 
 export default function App() {
   const [data, setData] = useState(null);
