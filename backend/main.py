@@ -8,12 +8,14 @@ from passlib.context import CryptContext
 from jose import jwt, JWTError
 from datetime import datetime, timedelta
 from typing import Optional
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 import sqlite3
 import hashlib
 import math
 import statistics
 
 app = FastAPI(title="AI Financial Risk, Portfolio & Fraud Intelligence Platform")
+security = HTTPBearer()
 
 app.add_middleware(
     CORSMiddleware,
@@ -128,22 +130,10 @@ def create_token(user_id: int, email: str, role: str):
     }
 
     return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
-
-
-def get_current_user(authorization: Optional[str] = Header(None)):
-    if not authorization:
-        raise HTTPException(
-            status_code=401,
-            detail="Login required"
-        )
-
-    if not authorization.startswith("Bearer "):
-        raise HTTPException(
-            status_code=401,
-            detail="Invalid authorization"
-        )
-
-    token = authorization.split(" ")[1]
+def get_current_user(
+    credentials: HTTPAuthorizationCredentials = Depends(HTTPBearer())
+):
+    token = credentials.credentials
 
     try:
         payload = jwt.decode(
@@ -151,6 +141,13 @@ def get_current_user(authorization: Optional[str] = Header(None)):
             SECRET_KEY,
             algorithms=[ALGORITHM]
         )
+        user_id = payload.get("user_id")
+
+        if user_id is None:
+            raise HTTPException(
+                status_code=401,
+                detail="Invalid token"
+            )
 
         return payload
 
