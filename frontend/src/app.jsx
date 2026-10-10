@@ -142,7 +142,40 @@ async function handleLogin(e) {
       description: "Reported risk level",
     },
   ];
+if (!loggedIn) {
+  return (
+    <div className="app">
+      <div className="panel">
+        <h1>FinSight Login</h1>
 
+        <form onSubmit={handleLogin}>
+          <label>Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          <label>MPIN</label>
+          <input
+            type="password"
+            value={mpin}
+            onChange={(e) => setMpin(e.target.value)}
+            maxLength={6}
+            required
+          />
+
+          {error && <p>{error}</p>}
+
+          <button type="submit" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
   return (
     <div className="app">
       <aside className="sidebar">
