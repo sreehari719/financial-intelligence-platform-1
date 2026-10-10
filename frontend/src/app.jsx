@@ -9,6 +9,11 @@ export default function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [email, setEmail] = useState("");
+const [mpin, setMpin] = useState("");
+const [loggedIn, setLoggedIn] = useState(
+  !!localStorage.getItem("access_token")
+);
 
   async function loadDashboard() {
     setLoading(true);
@@ -42,10 +47,47 @@ export default function App() {
     }
   }
 
-  useEffect(() => {
+ 
+useEffect(() => {
+  if (localStorage.getItem("access_token")) {
     loadDashboard();
-  }, []);
+  } else {
+    setLoading(false);
+    setError("Please log in to access your dashboard.");
+  }
+}, []);
 
+async function handleLogin(e) {
+  e.preventDefault();
+  setError("");
+  setLoading(true);
+
+  try {
+    const response = await fetch(`${API_URL}/api/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ email, mpin }),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.detail || "Login failed");
+    }
+
+    localStorage.setItem("access_token", result.access_token);
+    setLoggedIn(true);
+    setMpin("");
+    await loadDashboard();
+  } catch (err) {
+    setError(err.message || "Login failed");
+  } finally {
+    setLoading(false);
+  }
+}
   const getValue = (...keys) => {
     for (const key of keys) {
       if (data?.[key] !== undefined && data?.[key] !== null) {
