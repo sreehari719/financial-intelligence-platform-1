@@ -1,111 +1,14 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FinSight | Financial Intelligence</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <aside class="sidebar">
-        <h2>FinSight<span>.</span></h2>
-        <p class="menu-label">MAIN MENU</p>
-        <a class="active" href="#dashboard">▦ Dashboard</a>
-        <a href="#transactions">⇄ Transactions</a>
-        <a href="#risk">◈ Risk Analysis</a>
-        <a href="#portfolio">▤ Portfolio</a>
-        <a href="#fraud">⚠ Fraud Intelligence</a>
-
-        <div class="sidebar-bottom">
-            <a href="#settings">⚙ Settings</a>
-            <p>Financial Intelligence Platform</p>
-        </div>
-    </aside>
-
-    <main class="main-content" id="dashboard">
-        <header class="topbar">
-            <div>
-                <p class="eyebrow">FINANCIAL ANALYTICS PLATFORM</p>
-                <h1>Dashboard</h1>
-                <p class="subtitle">Monitor your financial intelligence in real time.</p>
-            </div>
-            <div class="profile">
-                <div class="avatar">FS</div>
-                <div>
-                    <strong>My Account</strong>
-                    <small>Financial Analyst</small>
-                </div>
-            </div>
-        </header>
-
-        <section class="connection">
-            <div>
-                <strong id="connection-title">Connecting to backend...</strong>
-                <p id="connection-message">Checking the FastAPI server.</p>
-            </div>
-            <button id="refresh-btn">Refresh Data ↻</button>
-        </section>
-
-        <section class="stats">
-            <article class="stat-card">
-                <div class="stat-heading">Total Transactions <span>⇄</span></div>
-                <h2 id="transaction-count">--</h2>
-                <p>Transactions recorded</p>
-            </article>
-
-            <article class="stat-card">
-                <div class="stat-heading">Transaction Value <span>₹</span></div>
-                <h2 id="transaction-value">₹0.00</h2>
-                <p>Total recorded transaction amount</p>
-            </article>
-
-            <article class="stat-card">
-                <div class="stat-heading">Suspicious Activity <span>⚠</span></div>
-                <h2 id="suspicious-count">--</h2>
-                <p>Flagged records, if provided by API</p>
-            </article>
-
-            <article class="stat-card">
-                <div class="stat-heading">Risk Status <span>◈</span></div>
-                <h2 id="risk-status">--</h2>
-                <p>Based on available backend data</p>
-            </article>
-        </section>
-
-        <section class="panel" id="transactions">
-            <div class="panel-heading">
-                <div>
-                    <h2>Dashboard Overview</h2>
-                    <p>Live response from your FastAPI backend</p>
-                </div>
-                <span class="live-label">● LIVE API</span>
-            </div>
-            <pre id="api-output">Waiting for dashboard data...</pre>
-        </section>
-
-        <section class="bottom-grid">
-            <article class="panel" id="risk">
-                <h2>Risk Intelligence</h2>
-                <p>Connect your risk-analysis endpoint to display customer risk scores.</p>
-                <div class="placeholder">Risk analysis module</div>
-            </article>
-
-            <article class="panel" id="portfolio">
-                <h2>Portfolio Intelligence</h2>
-                <p>Connect your portfolio endpoint to display investment performance.</p>
-                <div class="placeholder">Portfolio module</div>
-            </article>
-
-            <article class="panel" id="fraud">
-                <h2>Fraud Intelligence</h2>
-                <p>Display suspicious transactions returned by your fraud detection API.</p>
-                <div class="placeholder">Fraud detection module</div>
-            </article>
-        </section>
-
-        <footer>FinSight Financial Intelligence Platform · FastAPI Backend</footer>
-    </main>
-
+  </head>
+  <body>
+    <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-</body>
+  </body>
 </html>
+```
