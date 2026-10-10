@@ -3,9 +3,8 @@ import "./style.css";
 
 const API = (
   import.meta.env.VITE_API_URL ||
-  "https://backend-tau-nine-54.vercel.app"
+  "https://backend-hi5osbbd7-online-quizz.vercel.app"
 ).replace(/\/$/, "");
-
 const money = (value) =>
   new Intl.NumberFormat("en-IN", {
     style: "currency",
