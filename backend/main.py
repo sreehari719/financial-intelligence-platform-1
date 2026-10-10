@@ -29,7 +29,7 @@ TOKEN_EXPIRE_MINUTES = 60
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-DB = "financial_platform.db"
+DB = "/tmp/financial_platform.db"
 
 
 def get_db():
