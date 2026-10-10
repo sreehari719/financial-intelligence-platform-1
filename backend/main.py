@@ -167,7 +167,7 @@ class AuthRequest(BaseModel):
     mpin: str = Field(
         min_length=6,
         max_length=6,
-        regex=r"^\d{6}$"
+        pattern=r"^\d{6}$"
     )
 
     @validator("identifier")
