@@ -35,11 +35,23 @@ async function api(path, options = {}) {
 
   const result = await response.json().catch(() => ({}));
 
-  if (!response.ok) {
-    throw new Error(
-      result.detail || result.message || `Request failed (${response.status})`
-    );
+ if (!response.ok) {
+  let message = `Request failed (${response.status})`;
+
+  if (typeof result.detail === "string") {
+    message = result.detail;
+  } else if (Array.isArray(result.detail)) {
+    message = result.detail
+      .map((item) => item.msg || JSON.stringify(item))
+      .join(", ");
+  } else if (result.detail && typeof result.detail === "object") {
+    message = result.detail.message || JSON.stringify(result.detail);
+  } else if (typeof result.message === "string") {
+    message = result.message;
   }
+
+  throw new Error(message);
+}
 
   return result;
 }
