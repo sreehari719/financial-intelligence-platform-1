@@ -978,18 +978,16 @@ def audit_logs(
 # DASHBOARD
 # =========================
 
-@app.get("/api/dashboard")
-def dashboard(
-    user=Depends(get_current_user)
-):
 
+@app.get("/api/dashboard")
+def dashboard(user=Depends(get_current_user)):
     db = get_db()
 
     transaction_count = db.execute(
         """
         SELECT COUNT(*) AS count
         FROM transactions
-        WHERE user_id=?
+        WHERE user_id = ?
         """,
         (user["user_id"],)
     ).fetchone()["count"]
@@ -998,9 +996,16 @@ def dashboard(
         """
         SELECT COALESCE(SUM(amount), 0) AS total
         FROM transactions
-        WHERE user_id=?
+        WHERE user_id = ?
         """,
         (user["user_id"],)
     ).fetchone()["total"]
 
-    suspicious = db.execut
+    return {
+        "transaction_count": transaction_count,
+        "transaction_value": transaction_value,
+        "suspicious_transactions": 0,
+        "risk_score": 0,
+        "portfolio_value": 0
+    }
+
